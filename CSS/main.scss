@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito&family=Montserrat&display=swap');
+
+/*
+font-family: 'Bebas Neue', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Nunito', sans-serif;
+*/
+
+body {
+    background: white;
+}
+
+@import 'navbar';
+//  MAIN
+@import 'home';
+@import 'detail';
+@import 'shoppingCart';
+@import 'message';
+//  USER
+@import 'userSignIn';
+@import 'userLogin';
+//  GESTIONE
+@import 'gestione';
+@import 'tabella';
+@import 'gestioneAggiungi';
+@import 'gestioneModifica';
+@import 'gestioneRimuovi';

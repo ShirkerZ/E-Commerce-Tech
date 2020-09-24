@@ -1,0 +1,174 @@
+.cart {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 5vw 1fr 5vw;
+    .container {
+        grid-column: 2/3;
+        display: flex;
+        flex-direction: column;
+        .product {
+            grid-column: 1/3;
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            grid-template-rows: 150px;
+            grid-gap: .5rem;
+            margin: 1rem 0;
+            border: 2px solid #CADEFC;
+            border-left: 0;
+            border-right: 0;
+            img {
+                display: felx;
+                align-self: center;
+                background: #DEFCF9;
+                height: 100px;
+            }
+            main {
+                font-family: 'Montserrat', sans-serif;
+                display: grid;
+                grid-template-columns: 1fr 50px;
+                grid-template-rows: 1fr 1fr 1fr;
+                padding-top: 1rem;
+                .title {
+                    grid-column: 1/3;
+                    grid-row: 1/2;
+                    font-size: 1.3rem;
+                }
+                p {
+                    grid-column: 1/2;
+                    grid-row: 2/3;
+                    font-size: .8rem;
+                    display: none;
+                }
+                .prezzo {
+                    grid-column: 1/2;
+                    grid-row: 3/4;
+                    font-size: 1.3rem;
+                }
+                .cross-remove {
+                    grid-column: 2/3;
+                    grid-row: 2/3;
+                    margin: 1rem;
+                    cursor: pointer;
+                    .rec {
+                        background: #CCA8E9;
+                        height: 3px;
+                        width: 30px;
+                        transition: background .5s ease;
+                    }
+                    .a {
+                        transform: rotate(45deg);
+                    }
+                    .b {
+                        transform: rotate(-45deg);
+                    }
+                    &:hover .rec {
+                        background: #02FFE6;
+                    }
+                }
+            }
+        }
+        .bottom {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            .totale {
+                font-size: 1.3rem;
+            }
+            button {
+                position: relative;
+                margin: 1rem 0;
+                font-size: 1.3rem;
+                border: 1px solid #CCA8E9;
+                border-radius: 25px;
+                background: none;
+                outline: none;
+                padding: .5rem 1rem;
+                cursor: pointer;
+                overflow: hidden;
+                transition: color .5s ease;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    z-index: -1;
+                    top: 50%;
+                    left: 50%;
+                    height: 0;
+                    width: 100%;
+                    background: #CCA8E9;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                    transition: height .5s ease;
+                }
+                &:hover::before {
+                    //width: 100%;
+                    height: 300px;
+                }
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:768px) {
+    .cart {
+        .container {
+            .product {
+                main {
+                    .title {
+                        span {
+                            margin-left: 1rem;
+                        }
+                    }
+                    p {
+                        display: flex;
+                        margin: .5rem 0;
+                    }
+                }
+            }
+            .bottom {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-direction: row;
+                .totale {
+                    margin: 0 1rem;
+                }
+                button {
+                    margin: 3rem 0;
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:1100px) {
+    .cart {
+        .container {
+            .product {
+                width: 70vw;
+                display: grid;
+                grid-template-columns: 150px 1fr;
+                grid-template-rows: 180px;
+                grid-gap: 1rem;
+                main {
+                    .title {
+                        font-size: 1.5rem;
+                    }
+                    p {
+                        font-size: 1rem;
+                        width: 70%;
+                        margin: 1rem 0;
+                    }
+                }
+            }
+            .bottom {
+                width: 70vw;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+.table-smartphone {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 90vw;
+    overflow-x: scroll;
+    h2 {
+        margin: 1rem 0;
+    }
+    table {
+        margin: 1rem 0;
+        overflow: scroll;
+        tr {
+            th {
+                min-width: 150px;
+                text-align: center;
+                text-transform: uppercase;
+            }
+            td {
+                border: 1px solid #CADEFC;
+                padding: .5rem;
+                height: 50px;
+                text-align: center;
+                img {
+                    height: 100px;
+                }
+            }
+            td:last-child {
+                font-size: .7rem;
+                padding: 1rem;
+                min-width: 300px;
+            }
+        }
+    }
+}
+
+@media screen and(min-width:1100px) {
+    .table-smartphone {
+        max-width: 100vw;
+        overflow: initial;
+        table {
+            tr {
+                td:last-child {
+                    font-size: 1rem;
+                    min-width: 400px;
+                }
+            }
+        }
+    }
+}

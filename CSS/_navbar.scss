@@ -1,0 +1,205 @@
+nav {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 5vw 1fr 5vw;
+    .container {
+        grid-column: 2/3;
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 10vh;
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            a {
+                text-decoration: none;
+                color: #CCA8E9;
+            }
+        }
+        ul {
+            display: none;
+        }
+        .cross {
+            .rec {
+                width: 40px;
+                height: 3px;
+                margin: .5rem;
+                background: #CCA8E9;
+            }
+        }
+    }
+}
+
+.mobile-nav {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, #CADEFC 0%, #CCA8E9 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .fa-shopping-cart {
+        i {
+            font-size: 2rem;
+            color: #CCA8E9;
+        }
+    }
+    ul {
+        font-family: Montserrat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        li {
+            list-style: none;
+            margin: 1rem 0;
+            a {
+                font-size: 1.5rem;
+                text-decoration: none;
+                color: white;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+@media screen and(min-width:1100px) {
+    nav {
+        .container {
+            .logo {
+                font-size: 1.5rem;
+            }
+            ul {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: Montserrat;
+                min-width: 40%;
+                li {
+                    margin: 0 2rem;
+                    list-style: none;
+                    a {
+                        font-size: 1.3rem;
+                        color: #CCA8E9;
+                        text-decoration: none;
+                        padding: .7rem 1.5rem;
+                        display: flex;
+                        justify-content: center;
+                        position: relative;
+                        border: none;
+                        background: none;
+                        cursor: pointer;
+                    }
+                    .signIn {
+                        color: white;
+                        &::before,
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            width: 0;
+                            border-radius: 25px;
+                            height: 100%;
+                            transition: width .5s ease;
+                            z-index: -1;
+                        }
+                        &::before {
+                            width: 100%;
+                            right: 0;
+                            background: #CCA8E9;
+                        }
+                        &::after {
+                            width: 0;
+                            left: 0;
+                            background: #02FFE6;
+                        }
+                        &:hover::before {
+                            width: 0;
+                        }
+                        &:hover::after {
+                            width: 100%;
+                        }
+                    }
+                    .logOut {
+                        overflow: hidden;
+                        border-radius: 25px;
+                        transition-delay: .2s;
+                        transition: color .5 ease;
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            top: 50%;
+                            left: 50%;
+                            width: 100%;
+                            height: 0;
+                            transform: translate(-50%, -50%) rotate(45deg);
+                            background: #02FFE6;
+                            transition: height .5s ease;
+                        }
+                        &:hover::before {
+                            height: 100px;
+                        }
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                }
+                .dropDown {
+                    position: relative;
+                    font-size: 1.3rem;
+                    color: #C3BEF0;
+                    ul {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: flex;
+                        justify-content: space-evenly;
+                        flex-direction: column;
+                        width: 100%;
+                        height: 0;
+                        overflow: hidden;
+                        transition: height .5s ease, color .5s ease;
+                        li {
+                            height: 0;
+                            margin: .5rem 0;
+                            a {
+                                transition: color .5s ease;
+                                &:hover {
+                                    color: #02FFE6;
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        color: #CADEFC;
+                    }
+                    &:hover ul {
+                        height: 150px;
+                    }
+                }
+                .shopping {
+                    .fa-shopping-cart {
+                        cursor: pointer;
+                        font-size: 2rem;
+                        color: #CCA8E9;
+                        transition: color .5s ease;
+                        &:hover {
+                            color: #02FFE6;
+                        }
+                    }
+                }
+            }
+            .cross {
+                display: none;
+            }
+        }
+    }
+}

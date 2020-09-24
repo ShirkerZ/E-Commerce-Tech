@@ -1,0 +1,165 @@
+.detail {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 5vw 1fr 5vw;
+    .container {
+        grid-column: 2/3;
+        .content {
+            display: flex;
+            flex-direction: column;
+            img {
+                width: 100%;
+                background: #DEFCF9;
+                border-radius: 4px;
+            }
+            main {
+                font-family: 'Montserrat', sans-serif;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                h1 {
+                    margin: 1.5rem 0;
+                }
+                .descrizione {
+                    font-family: 'Nunito', sans-serif;
+                }
+                .bottom {
+                    margin: 2rem 0;
+                    .numbers {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 1rem 0;
+                        .prezzo {
+                            font-size: 1.5rem;
+                        }
+                        .quantita {
+                            font-size: 1rem;
+                        }
+                    }
+                    button {
+                        border: none;
+                        outline: none;
+                        background: #CCA8E9;
+                        color: white;
+                        border-radius: 25px;
+                        padding: .5rem 1rem;
+                        font-size: 1.3rem;
+                        width: 100%;
+                        margin: 1rem 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:768px) {
+    .detail {
+        max-height: 100vh;
+        .container {
+            .content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 10vh 50vh;
+                grid-gap: 2rem;
+                img {
+                    grid-row: 2/3;
+                    //min-height: 400px;
+                }
+                main {
+                    grid-row: 2/3;
+                    h1 {
+                        margin: 0;
+                        margin-bottom: 1.5rem;
+                    }
+                    .bottom {
+                        margin: 0;
+                        margin-top: 2rem;
+                        button {
+                            position: relative;
+                            border: none;
+                            background: none;
+                            color: white;
+                            cursor: pointer;
+                            &::before,
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                width: 0;
+                                border-radius: 6px;
+                                height: 100%;
+                                transition: width .5s ease;
+                                z-index: -1;
+                            }
+                            &::before {
+                                width: 100%;
+                                right: 0;
+                                background: #CCA8E9;
+                            }
+                            &::after {
+                                width: 0;
+                                left: 0;
+                                background: #02FFE6;
+                            }
+                            &:hover::before {
+                                width: 0;
+                            }
+                            &:hover::after {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:1100px) {
+    .detail {
+        .container {
+            .content {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr 1fr;
+                grid-gap: 0 2rem;
+                img {
+                    //height: 100%;
+                    max-height: 70vh;
+                }
+                main {
+                    h1 {
+                        font-size: 2rem;
+                    }
+                    .descrizione {
+                        font-size: 1.3rem;
+                    }
+                    .bottom {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .numbers {
+                            margin: 0;
+                            width: 50%;
+                            .prezzo {
+                                font-size: 1.7rem;
+                            }
+                            .quantita {
+                                font-size: 1.3rem;
+                            }
+                        }
+                        button {
+                            margin: 0;
+                            max-width: 250px;
+                            padding: .7rem 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

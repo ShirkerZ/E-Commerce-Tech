@@ -1,0 +1,136 @@
+.home {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 5vw 1fr 5vw;
+    .container {
+        grid-column: 2/3;
+        form {
+            display: flex;
+            margin: 1rem 0;
+            font-family: 'Nunito', sans-serif;
+            input {
+                border: none;
+                background: #CADEFC;
+                border-radius: 8px 0 0 8px;
+                padding: .5rem;
+                outline: none;
+                transition: background .5s ease;
+                &:focus {
+                    background: #DEFCF9;
+                }
+            }
+            .search {
+                border: none;
+                background: #C3BEF0;
+                padding: .5rem .7rem;
+                border-radius: 0 8px 8px 0;
+                cursor: pointer;
+                transition: background .5s ease;
+                i {
+                    color: #ffffff;
+                    font-size: 1.2rem;
+                    pointer-events: none;
+                }
+                &:hover {
+                    background: #D9BEEF;
+                }
+            }
+            .filter {
+                color: #D9BEEF;
+                position: relative;
+                margin-left: .5rem;
+                font-size: 1.3rem;
+                cursor: pointer;
+                .filter-ul {
+                    position: absolute;
+                    margin-top: .5rem;
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 150px;
+                    font-size: 1rem;
+                    overflow: hidden;
+                    height: 0;
+                    li {
+                        margin: .5rem 0;
+                        list-style: none;
+                        button {
+                            cursor: pointer;
+                            background: none;
+                            border: none;
+                            outline: none;
+                            color: #D9BEEF;
+                        }
+                    }
+                }
+            }
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 1rem;
+            .card {
+                background: white;
+                max-width: 340px;
+                box-shadow: 5px 5px 30px #d0d0d0, -5px -5px 60px #ffffff;
+                border-radius: 10px;
+                margin: 3rem 0;
+                transition: box-shadow .5s ease;
+                &:hover {
+                    box-shadow: 20px 20px 60px #d0d0d0, -20px -20px 60px #ffffff
+                }
+                a {
+                    text-decoration: none;
+                    display: grid;
+                    grid-template-rows: 50px 250px 50px 200px 100px;
+                    color: black;
+                    h2 {
+                        margin: 1rem 0;
+                        font-family: 'Montserrat', sans-serif;
+                        text-align: center;
+                    }
+                    img {
+                        display: flex;
+                        justify-self: center;
+                        background: #CADEFC;
+                        height: 250px;
+                    }
+                    p {
+                        padding: 1rem;
+                        font-family: 'Nunito', sans-serif;
+                    }
+                    .numbers {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        .prezzo {
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:768px) {
+    .home {
+        .container {
+            form {
+                .filter {
+                    margin-left: 2rem;
+                    .filter-ul {
+                        li {
+                            button {
+                                font-size: 1.3rem;
+                                &:hover {
+                                    color: #02FFE6;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
