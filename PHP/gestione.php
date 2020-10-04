@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*      GESTIONE SMARTPHONE     */
 
 //  AGGIUNGI SMARTPHONE
@@ -11,12 +13,14 @@ function addSmartphone($marca, $modello, $descrizione, $quantita, $prezzo, $imag
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "sssids", $marca, $modello, $descrizione, $quantita, $prezzo, $imageName);
         if (mysqli_stmt_execute($stmt)) {
-            echo "<div id='success'>Input inserito correttamente </div>";
+            header('Location: gestioneAggiungi.php?message=s7');
         } else {
-            echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+            //echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+            header('Location: gestioneAggiungi.php?message=r3');
         }
     } else {
-        echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+        //echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+        header('Location: gestioneAggiungi.php?message=r4');
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
@@ -25,21 +29,34 @@ function addSmartphone($marca, $modello, $descrizione, $quantita, $prezzo, $imag
 //  MODIFICA SMARTPHONE
 function modifySmartphone($marca, $modello, $descrizione, $quantita, $prezzo, $imageName, $id)
 {
-    $query = "UPDATE smartphone SET marca = ?  modello = ? descrizione = ? quantita = ? prezzo = ? immagine = ? WHERE idSmartphone = ?;";
+    $query = "UPDATE smartphone SET  
+    marca = (CASE WHEN ? != ' ' THEN '$marca' ELSE marca END),
+    modello = (CASE WHEN ?  != ' ' THEN '$modello' ELSE modello END),
+    descrizione = (CASE WHEN ?  != ' ' THEN '$descrizione' ELSE descrizione END),
+    quantita = (CASE WHEN ?  != ' ' THEN '$quantita' ELSE quantita END),
+    prezzo = (CASE WHEN ?  != ' ' THEN '$prezzo' ELSE prezzo END),
+    immagine = (CASE WHEN ?  != ' ' THEN '$imageName' ELSE immagine END)
+    WHERE idSmartphone = ?;";
     $conn = getDatabase();
 
-    if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "sssidsi", $marca, $modello, $descrizione, $quantita, $prezzo, $imageName, $id);
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<div id='success'>Input inserito correttamente </div>";
+    if ($id != 0) {
+        if ($stmt = mysqli_prepare($conn, $query)) {
+            mysqli_stmt_bind_param($stmt, "sssidsi", $marca, $modello, $descrizione, $quantita, $prezzo, $imageName, $id);
+            if (mysqli_stmt_execute($stmt)) {
+                header('Location: gestioneAggiungi.php?message=s8');
+            } else {
+                //echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+                header('Location: gestioneModifica.php?message=r3');
+            }
         } else {
-            echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+            //echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+            header('Location: gestioneModifica.php?message=r4');
         }
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
     } else {
-        echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+        header('Location: gestioneAggiungi.php?message=r8');
     }
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
 }
 
 //  RIMUOVI SMARTPHONE
@@ -51,12 +68,14 @@ function removeSmartphone($id)
     if ($stmt = mysqli_prepare($conn, $query)) {
         mysqli_stmt_bind_param($stmt, "i", $id);
         if (mysqli_stmt_execute($stmt)) {
-            echo "<div id='success'>Input inserito correttamente </div>";
+            header('Location: gestioneRimuovi.php?message=s9');
         } else {
-            echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+            //echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+            header('Location: gestioneRimuovi.php?message=r3');
         }
     } else {
-        echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+        //echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+        header('Location: gestioneRimuovi.php?message=r4');
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
@@ -79,24 +98,21 @@ function addUser($username, $email, $hash)
     // Se l'utente ha già un account...
     if ($user) {
         if ($user['username'] === $username && $user['email'] === $email) {
-            echo "<div id='error'>Questo account esiste gia'...</div>";
             mysqli_close($conn);
-            alert('Questo account esiste già...');
+            header('Location: userSignin.php?message=r2');
             exit;
         }
     } else {
         if ($stmt = mysqli_prepare($conn, $query)) {
             mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hash);
             if ($test = mysqli_stmt_execute($stmt)) {
-                echo "<div id='success'>Input inserito correttamente </div>";
                 $_SESSION['id'] = mysqli_insert_id($conn);
-                alert('Registrazione completata.');
-                header('Location: index.php');
+                header('Location: index.php?message=s3');
             } else {
-                echo "<div id='error'>ERROR: Could not execute query: $query. </div> " . mysqli_error($conn);
+                header('Location: index.php?message=r3');
             }
         } else {
-            echo "<div id='error'>ERROR: Could not prepare query: $query. </div> " . mysqli_error($conn);
+            header('Location: index.php?message=r4');
         }
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
@@ -114,20 +130,18 @@ function login($email, $hash)
     if ($user = mysqli_fetch_assoc($result)) {
         if ($hash === $user['password']) {
             $autenticato = true;
-        }
-        else {
-            alert('Password sbagliata...');
+        } else {
+            header('Location: userLogin.php?message=r1');
             $autenticato = false;
         }
-    } 
+    }
 
 
     if ($autenticato) {
         $_SESSION['id'] = $user['idUtente'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['admin'] = $user['admin'];
-        alert('Utente autenticato.');
-        header('Location: index.php');
+        header('Location: index.php?message=s1');
     } else {
         mysqli_close($conn);
     }
@@ -140,8 +154,7 @@ function logOut()
     unset($_SESSION);
     session_destroy();
     session_write_close();
-    alert('Utente uscito.');
-    header('Location: index.php');
+    header('Location: index.php?message=s2');
     die;
 }
 
@@ -169,7 +182,7 @@ function addToCart()
         mysqli_close($conn);
     }
 
-    header('Location: ./index.php');
+    header('Location: ./index.php?message=s4');
 }
 
 //  RIMUOVI DAL CARRELLO
@@ -192,7 +205,7 @@ function removeFromCart()
         mysqli_query($conn, $query);
         mysqli_close($conn);
     }
-    header('Location: ./mainCarrello.php?idSmartphone=' . $idProdotto . '');
+    header('Location: ./mainCarrello.php?idSmartphone=' . $idProdotto . '&message=s5');
 }
 
 //  ACQUISTO    /   TOGLI QUANTITA'
@@ -221,9 +234,10 @@ function acquista()
             mysqli_query($conn, $query_remove_cart);
             mysqli_close($conn);
         }
-        alert('Acquisto riuscito :)');
+        header('Location: ./mainCarrello.php?message=s6');
     } else {
         alert('ERRORE:  Acquisto non riuscito :(');
+        header('Location: ./mainCarrello.php?message=r5');
         mysqli_close($conn);
     }
 }

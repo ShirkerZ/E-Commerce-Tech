@@ -3,6 +3,18 @@
 //  CONNESSIONE AL DB
 function getDatabase()
 {
+    $server = 'sql202.epizy.com';
+    $user = 'epiz_26814141';
+    $pwd = 'NnIhvb2zlBML';
+    $db = 'epiz_26814141_E_Commerce';
+    $conn = mysqli_connect($server, $user, $pwd, $db) or die('Connessione fallita');
+    return $conn;
+}
+
+/*
+//  CONNESSIONE AL DB LOCALHOST
+function getDatabase()
+{
     $server = 'localhost';
     $user = 'root';
     $pwd = '';
@@ -10,12 +22,7 @@ function getDatabase()
     $conn = mysqli_connect($server, $user, $pwd, $db) or die('Connessione fallita');
     return $conn;
 }
-
-//  ALERT
-function alert($msg)
-{
-    echo "<script>alert('$msg');</script>";
-}
+*/
 
 
 /*       CARDS       */
@@ -188,7 +195,7 @@ function getShoppingCart()
     $elenco = [];
     //se visitatore
     if (!isset($_SESSION['id'])) {
-        $values = join(",", $_SESSION['cart']);
+        $values = @join(",", $_SESSION['cart']);
         $query = "SELECT * FROM smartphone WHERE idSmartphone IN ($values);";
     }
     //se utente registrato

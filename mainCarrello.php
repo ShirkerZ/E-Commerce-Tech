@@ -2,6 +2,7 @@
 
 require './PHP/smartphone.php';
 require './PHP/gestione.php';
+require './PHP/errors.php';
 
 session_start();
 
@@ -29,6 +30,8 @@ session_start();
         <div class="container">
 
             <?php
+            echo message();
+            
             if(isset($_POST['checkOut'])){
                 acquista();
                 echo getShoppingCart();

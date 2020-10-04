@@ -2,9 +2,10 @@
 
 require './PHP/smartphone.php';
 require './PHP/gestione.php';
+require './PHP/errors.php';
 
 session_start();
-if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
+if (!isset($_SESSION['id']) || $_SESSION['admin'] != 1) {
     header('Location: message.php');
 }
 
@@ -36,40 +37,57 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
                 <li><a href="gestioneRimuovi.php">Rimuovi Prodotto</a></li>
             </ul>
 
-            <form action="" method="post" enctype="multipart/form-data">
 
+            <form action="" method="post" enctype="multipart/form-data">
+       
+            <?php
+            echo message();
+            if (isset($_POST['submit'])) {
+
+                $imageName = $_FILES['image']['name'];
+
+                addSmartphone($_POST['marca'], $_POST['modello'], $_POST['descrizione'], $_POST['quantita'], $_POST['prezzo'], $imageName);
+                //  CARICO IMG NELLA CARTELLA
+                $target = "img/" . basename($_FILES['image']['name']);
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                    $msg = 'Image uploaded succesfully.';
+                } else {
+                    $msg = 'Error...';
+                }
+            }
+            ?>
                 <div class="field field-marca">
                     <label for="marca">Marca</label>
-                    <input type="text" name="marca">
+                    <input type="text" name="marca" required>
                 </div>
 
                 <div class="field field-modello">
                     <label for="modello">Modello</label>
-                    <input type="text" name="modello">
+                    <input type="text" name="modello" required>
                 </div>
 
                 <div class="field field-descrizione">
                     <label for="descrizione">Descrizione</label>
-                    <textarea name="descrizione" id="" cols="30" rows="10"></textarea>
+                    <textarea name="descrizione" id="" cols="30" rows="10" required></textarea>
                 </div>
 
                 <div class="field field-numbers">
 
                     <div class="field field-prezzo">
                         <label for="prezzo">Prezzo</label>
-                        <input type="number" name="prezzo">
+                        <input type="number" name="prezzo" required>
                     </div>
 
                     <div class="field field-quantita">
                         <label for="quantita">Quantità</label>
-                        <input type="number" name="quantita">
+                        <input type="number" name="quantita" required>
                     </div>
 
                 </div>
 
                 <div class="field field-image">
                     <label for="image">Immagine</label>
-                    <input type="file" name="image" id="">
+                    <input type="file" name="image" id="" required>
                 </div>
 
                 <button type="submit" name="submit">Aggiungi</button>
@@ -91,23 +109,5 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
 
     <script src="./JS/main.js"></script>
 </body>
-
-<?php
-
-if (isset($_POST['submit'])) {
-
-    $imageName = $_FILES['image']['name'];
-
-    addSmartphone($_POST['marca'], $_POST['modello'], $_POST['descrizione'], $_POST['quantita'], $_POST['prezzo'], $imageName);
-    //  CARICO IMG NELLA CARTELLA
-    $target = "img/" . basename($_FILES['image']['name']);
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        $msg = 'Image uploaded succesfully.';
-    } else {
-        $msg = 'Error...';
-    }
-}
-
-?>
 
 </html>

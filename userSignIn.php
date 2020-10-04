@@ -2,6 +2,7 @@
 
 require './PHP/smartphone.php';
 require './PHP/gestione.php';
+require './PHP/errors.php';
 
 session_start();
 
@@ -51,6 +52,8 @@ session_start();
                     <input type="password" name="conf-password">
                 </div>
 
+                <?php echo message() ?>
+
                 <button type="submit" name="submit">Registrati</button>
 
                 <p>Hai già un account? Effettua il <a href="./userLogin.php">Login</a></p>
@@ -79,7 +82,7 @@ session_start();
 if (isset($_POST['submit'])) {
 
     if($_POST['password'] !== $_POST['conf-password']){
-        alert("Le password non coincidono");
+        header('Location: userSignIn.php?message=r7');
     }else{
         $hash = hash("sha512", $_POST['password']);
 

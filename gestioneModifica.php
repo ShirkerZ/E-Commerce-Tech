@@ -48,7 +48,7 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
 
                 <div class="field field-id">
                     <label for="id">ID</label>
-                    <input type="number" name="id">
+                    <input type="number" name="id" required>
                 </div>
 
                 <div class="field field-marca">

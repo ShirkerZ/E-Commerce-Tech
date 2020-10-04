@@ -1001,6 +1001,47 @@ nav .container .cross .rec {
   }
 }
 
+.error {
+  font-family: 'Montserrant', sans-serif;
+  color: #FF0000;
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin: .5rem 0;
+  max-width: 360px;
+  max-height: 70px;
+  background: rgba(251, 1, 1, 0.2);
+  border: 1px solid #FF0000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.success {
+  font-family: 'Montserrant', sans-serif;
+  color: #16CB49;
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin: .5rem 0;
+  max-width: 360px;
+  background: rgba(1, 251, 26, 0.2);
+  border: 1px solid #1CB835;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 @media screen and (min-width: 768px) {
   .sign-in .container .form {
     width: 100%;

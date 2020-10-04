@@ -1,6 +1,7 @@
 <?php
 
 require './PHP/smartphone.php';
+require './PHP/errors.php';
 
 session_start();
 if(!isset($_SESSION['cart'])){
@@ -39,6 +40,8 @@ if(!isset($_SESSION['cart'])){
                 </div>
 
             </form>
+
+            <?php echo message() ?>
 
             <div class="card-container">
 

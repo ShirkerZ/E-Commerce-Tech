@@ -3,13 +3,13 @@
 class DBController
 {
 
-    private $host = "host";
+    private $host = "sql202.epizy.com";
 
-    private $user = "username";
+    private $user = "epiz_26814141";
 
-    private $password = "password";
+    private $password = "NnIhvb2zlBML";
 
-    private $database = "dbname";
+    private $database = "epiz_26814141_E_Commerce";
 
     private $conn;
 

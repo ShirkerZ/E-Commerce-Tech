@@ -45,8 +45,7 @@ $(document).ready(function() {
 
     //  ADD ACTIVE CLASS ON URL CHANGE
     $(function() {
-        let currentNav = $('.gestione-nav li a[href^="' + location.pathname.split("/E-commerce-tech/")[1] + '"]').addClass('active');
-        console.log(currentNav)
+        let currentNav = $('.gestione-nav li a[href^="' + location.pathname.split("/E-Tech/")[1] + '"]').addClass('active');
         TweenMax.set(currentNav, { color: '#02FFE6' })
     });
 
@@ -56,10 +55,4 @@ $('.show-table').click(function() {
     console.log('CLICK')
     $('.table-smartphone').slideToggle();
 
-})
-
-const filter = document.querySelector('.filter');
-
-filter.addEventListener('click', function(e) {
-    console.log(e.target)
 })

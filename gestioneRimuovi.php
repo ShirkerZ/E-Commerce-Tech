@@ -2,9 +2,10 @@
 
 require './PHP/smartphone.php';
 require './PHP/gestione.php';
+require './PHP/errors.php';
 
 session_start();
-if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
+if (!isset($_SESSION['id']) || $_SESSION['admin'] != 1) {
     header('Location: message.php');
 }
 
@@ -24,7 +25,6 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
     <?php
 
     include './Templates/navbar.php';
-    
 
     ?>
 
@@ -41,7 +41,14 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
 
             <?php
 
-            echo getTabellaSmartphone();
+            echo message();
+
+            if (isset($_POST['submit'])) {
+                echo getTabellaSmartphone();
+                removeSmartphone($_POST['id']);
+            } else {
+                echo getTabellaSmartphone();
+            }
 
             ?>
 
@@ -49,7 +56,7 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
 
                 <div class="field field-id">
                     <label for="id">ID</label>
-                    <input type="number" name="id">
+                    <input type="number" name="id" required>
                 </div>
 
                 <button type="submit" name="submit">Rimuovi</button>
@@ -71,14 +78,5 @@ if( !isset($_SESSION['id']) || $_SESSION['admin'] != 1){
 
     <script src="./JS/main.js"></script>
 </body>
-
-<?php
-
-if (isset($_POST['submit'])) {
-
-    removeSmartphone($_POST['id']);
-}
-
-?>
 
 </html>

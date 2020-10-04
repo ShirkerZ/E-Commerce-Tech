@@ -2,6 +2,7 @@
 
 require './PHP/smartphone.php';
 require './PHP/gestione.php';
+require './PHP/errors.php';
 
 session_start();
 
@@ -40,6 +41,8 @@ session_start();
                     <label for="password">Password</label>
                     <input type="password" name="password">
                 </div>
+
+                <?php echo message() ?>
 
                 <button type="submit" name="submit">Accedi</button>
 
